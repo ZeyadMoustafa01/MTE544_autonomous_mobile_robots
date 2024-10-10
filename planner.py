@@ -6,8 +6,6 @@ import time
 
 POINT_PLANNER=0; A_STAR_PLANNER=1; RRT_PLANNER=2; RRT_STAR_PLANNER=3
 
-# TODO Modify this class so that is uses the RRT* planner with virtual obstacles
-
 class planner:
     def __init__(self, type_, mapName="room"):
 
@@ -70,8 +68,6 @@ class planner:
             goal_sample_rate=30,
             path_resolution=1
         )
-
-        #TODO Remember to initialize the rrt_star
         
     
     def trajectory_planner(self, startPoseCart=None, endPoseCart=None, type=None):
@@ -92,7 +88,6 @@ class planner:
         
         start_time = time.time()
 
-        # TODO This is for A*, modify this part to use RRT*
         if type == A_STAR_PLANNER:
             path = search(self.costMap, startPose, endPose, scale_factor)
         elif type == RRT_STAR_PLANNER:
@@ -111,7 +106,6 @@ class planner:
         # path_ = [[x*scale_factor, y*scale_factor] for x,y in path]
         # Path = np.array(list(map(self.m_utilites.cell_2_position, path_)))
 
-        # TODO Smooth the path before returning it to the decision maker
         # this can be in form of a function that you can put in the utilities.py 
         # or add it as a method to the original rrt.py 
         path = path[::-1]
